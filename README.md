@@ -11,3 +11,8 @@ rename and recreation of the file.
 
 Shows its arguments, printing them C-escaped when characters in the values
 are sufficiently strange.
+
+# `xd`
+
+Dump each file given as argument as a hex and ascii dump, in the style
+of early debuggers and monitors. Read stdin if no arguments are given.
