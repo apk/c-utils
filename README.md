@@ -42,3 +42,10 @@ are sufficiently strange.
 
 Dump each file given as argument as a hex and ascii dump, in the style
 of early debuggers and monitors. Read stdin if no arguments are given.
+
+## `escat`
+
+Like cat, but escape special characters, and backticks, by a backtick
+and the two hex digits representing the character. Special characters
+are everyting but printable asccii characters, newlines, tags, and
+carriage returns.
