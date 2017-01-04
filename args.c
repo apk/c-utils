@@ -1,3 +1,5 @@
+/* -*- mode: C; c-basic-offset: 8; -*- */
+
 #include <stdio.h>
 
 main (int iArgc, char **ppszArgv) {

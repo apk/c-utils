@@ -1,3 +1,5 @@
+/* -*- mode: C; c-basic-offset: 8; -*- */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/stat.h>
