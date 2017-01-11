@@ -20,7 +20,7 @@ main (int iArgc, char **ppszArgv) {
 				break;
 			}
 		}
-		if (*pc) {
+		if (*pc || pc == ppszArgv [i]) {
 			putchar ('\"');
 			for (pc = ppszArgv [i]; *pc; pc ++) {
 				int c = 0xff & *pc;
