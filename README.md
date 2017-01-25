@@ -47,5 +47,5 @@ of early debuggers and monitors. Read stdin if no arguments are given.
 
 Like cat, but escape special characters, and backticks, by a backtick
 and the two hex digits representing the character. Special characters
-are everyting but printable asccii characters, newlines, tags, and
+are everything but printable asccii characters, newlines, tabs, and
 carriage returns.
