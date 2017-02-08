@@ -2,14 +2,14 @@
 
 #include <stdio.h>
 
-main (int iArgc, char **ppszArgv) {
+main (int argc, char **argv) {
 	int multiline = 0;
 	int always = 0;
 	int hide = 0;
 	int i;
 	int nextsep = 0;
-	if (iArgc > 1) {
-		char *pc = ppszArgv [1];
+	if (argc > 1) {
+		char *pc = argv [1];
 		if (*pc == '-') {
 			char *h = pc + 1;
 			while (*h) {
@@ -27,8 +27,8 @@ main (int iArgc, char **ppszArgv) {
 			}
 		}
 	}
-	for (i = 0; i < iArgc; i ++) {
-		char *pc = ppszArgv [i];
+	for (i = 0; i < argc; i ++) {
+		char *pc = argv [i];
 		/* hide can only be true when argv[1]
 		 * is the hide option, so don't check
 		 * again for the opt.
@@ -53,9 +53,9 @@ main (int iArgc, char **ppszArgv) {
 				}
 			}
 		}
-		if (*pc || pc == ppszArgv [i]) {
+		if (*pc || pc == argv [i]) {
 			putchar ('\"');
-			for (pc = ppszArgv [i]; *pc; pc ++) {
+			for (pc = argv [i]; *pc; pc ++) {
 				int c = 0xff & *pc;
 				switch (c) {
 				case '\"':
@@ -80,7 +80,7 @@ main (int iArgc, char **ppszArgv) {
 			}
 			putchar ('\"');
 		} else {
-			for (pc = ppszArgv [i]; *pc; pc ++) {
+			for (pc = argv [i]; *pc; pc ++) {
 				int c = 0xff & *pc;
 				putchar (c);
 			}
