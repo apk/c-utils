@@ -15,7 +15,7 @@ Similar to `env`, but having a different option set:
 * `-v` shows the currently remaining arguments.
 * `-wN` sleeps for N seconds.
 * `-X` replaces every sequence `X<hex><hex>` in all following
-  arguments given by the character value `<hex><hex>. This is
+  arguments given by the character value `<hex><hex>`. This is
   a hack for some ssh versions that `s/=/ /` on `ProxyCommand`.
 * `-Xc` similar, but use the given char instead of `X`.
 * `NAME=value` sets the environment variable `NAME` like `env` does.
