@@ -3,6 +3,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 
 int hexof (int c) {
 	switch (c) {
@@ -43,6 +46,38 @@ main (int argc, char **argv) {
 				continue;
 			}
 			fprintf (stderr, "No arg for -C\n");
+			return 1;
+		} else if (!strcmp (argv [i], "-O")) {
+			if (i + 1 < argc) {
+				int fd = open (argv [++ i], O_WRONLY | O_CREAT | O_TRUNC, 0666);
+				if (fd == -1) {
+					fprintf (stderr, "Cannot open %s for writing\n", argv [i]);
+					return 1;
+				}
+				if (dup2 (fd, 1) == -1) {
+					fprintf (stderr, "Dup failed for %s\n", argv [i]);
+					return 1;
+				}
+				close (fd);
+				continue;
+			}
+			fprintf (stderr, "No arg for -O\n");
+			return 1;
+		} else if (!strcmp (argv [i], "-I")) {
+			if (i + 1 < argc) {
+				int fd = open (argv [++ i], 0);
+				if (fd == -1) {
+					fprintf (stderr, "Cannot open %s for reading\n", argv [i]);
+					return 1;
+				}
+				if (dup2 (fd, 0) == -1) {
+					fprintf (stderr, "Dup failed for %s\n", argv [i]);
+					return 1;
+				}
+				close (fd);
+				continue;
+			}
+			fprintf (stderr, "No arg for -I\n");
 			return 1;
 		} else if (argv [i] [0] == '-' &&
 			   argv [i] [1] == 'v' &&

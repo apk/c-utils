@@ -14,6 +14,8 @@ Similar to `env`, but having a different option set:
 * `-C arg` changes into the given directory.
 * `-v` shows the currently remaining arguments.
 * `-wN` sleeps for N seconds.
+* `-I file` redirects stdin to read from the given file.
+* `-O file` redirects stdout to write to the given file.
 * `-X` replaces every sequence `X<hex><hex>` in all following
   arguments given by the character value `<hex><hex>`. This is
   a hack for some ssh versions that `s/=/ /` on `ProxyCommand`.
