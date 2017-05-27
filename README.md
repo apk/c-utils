@@ -9,7 +9,7 @@ rename and recreation of the file.
 
 ## `aenv`
 
-Similar to `env`, but having a different option set:
+Similar to `env`, but having a wildly different option set:
 
 * `-C arg` changes into the given directory.
 * `-v` shows the currently remaining arguments.
@@ -22,7 +22,11 @@ Similar to `env`, but having a different option set:
 * `-Xc` similar, but use the given char instead of `X`.
 * `--pwnam user` change (primary) group and user id to that of
   the given user. Requires sufficient privileges.
+* `--fork` goes into background by forking and exiting in the
+  foreground process.
 * `NAME=value` sets the environment variable `NAME` like `env` does.
+
+Options are processed in order they are given.
 
 The first thing that is not one of the above is taken as the command
 to execute, with the following arguments as parameters.

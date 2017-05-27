@@ -147,6 +147,15 @@ main (int argc, char **argv) {
 				}
 				*t = 0;
 			}
+		} else if (strcmp (argv [i], "--fork") == 0) {
+			int r = fork ();
+			if (r == -1) {
+				fprintf (stderr, "Cannot fork\n");
+				return 1;
+			}
+			if (r != 0) {
+				return 0;
+			}
 		} else if (strchr (argv [i], '=')) {
 			if (putenv (argv [i])) {
 				fprintf (stderr, "No memory\n");
