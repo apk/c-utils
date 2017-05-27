@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <pwd.h>
 
 int hexof (int c) {
 	switch (c) {
@@ -78,6 +79,26 @@ main (int argc, char **argv) {
 				continue;
 			}
 			fprintf (stderr, "No arg for -I\n");
+			return 1;
+		} else if (!strcmp (argv [i], "--pwnam")) {
+			if (i + 1 < argc) {
+				char *u = argv [++ i];
+				struct passwd *p = getpwnam (u);
+				if (!p) {
+					fprintf (stderr, "No passwd entry for %s\n", u);
+					return 3;
+				}
+				if (setregid (p->pw_gid, p->pw_gid)) {
+					fprintf (stderr, "setgid failed\n");
+					return 4;
+				}
+				if (setreuid (p->pw_uid, p->pw_uid)) {
+					fprintf (stderr, "setuid failed\n");
+					return 4;
+				}
+				continue;
+			}
+			fprintf (stderr, "No arg for --pwnam\n");
 			return 1;
 		} else if (argv [i] [0] == '-' &&
 			   argv [i] [1] == 'v' &&

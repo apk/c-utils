@@ -20,6 +20,8 @@ Similar to `env`, but having a different option set:
   arguments given by the character value `<hex><hex>`. This is
   a hack for some ssh versions that `s/=/ /` on `ProxyCommand`.
 * `-Xc` similar, but use the given char instead of `X`.
+* `--pwnam user` change (primary) group and user id to that of
+  the given user. Requires sufficient privileges.
 * `NAME=value` sets the environment variable `NAME` like `env` does.
 
 The first thing that is not one of the above is taken as the command
