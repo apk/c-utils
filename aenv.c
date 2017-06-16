@@ -49,6 +49,27 @@ main (int argc, char **argv) {
 			}
 			fprintf (stderr, "No arg for -C\n");
 			return 1;
+		} else if (!strcmp (argv [i], "-U")) {
+			if (i + 1 < argc) {
+				if (unsetenv (argv [++ i])) {
+					perror ("unsetenv");
+					return 1;
+				}
+				continue;
+			}
+			fprintf (stderr, "No arg for -U\n");
+			return 1;
+		} else if (!strcmp (argv [i], "-S")) {
+			if (i + 2 < argc) {
+				char *n = argv [++ i];
+				if (setenv (n, argv [++ i], 1)) {
+					perror ("setenv");
+					return 1;
+				}
+				continue;
+			}
+			fprintf (stderr, "No arg for -U\n");
+			return 1;
 		} else if (!strcmp (argv [i], "-O")) {
 			if (i + 1 < argc) {
 				int fd = open (argv [++ i], O_WRONLY | O_CREAT | O_TRUNC, 0666);
@@ -158,8 +179,11 @@ main (int argc, char **argv) {
 				return 0;
 			}
 		} else if (strchr (argv [i], '=')) {
+			/* Yes, putenv is save here; it's argument
+			 * is from the parameter array.
+			 */
 			if (putenv (argv [i])) {
-				fprintf (stderr, "No memory\n");
+				perror ("putenv");
 				return 1;
 			}
 #ifdef CDX

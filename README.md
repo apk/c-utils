@@ -25,6 +25,8 @@ Similar to `env`, but having a wildly different option set:
 * `--fork` goes into background by forking and exiting in the
   foreground process.
 * `NAME=value` sets the environment variable `NAME` like `env` does.
+* `-S NAME values` sets the environment variable `NAME` to `value`.
+* `-U NAME` unsets the environment variable `NAME`.
 
 Options are processed in order they are given.
 
