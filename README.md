@@ -14,6 +14,9 @@ Similar to `env`, but having a wildly different option set:
 * `-C arg` changes into the given directory.
 * `-v` shows the currently remaining arguments.
 * `-wN` sleeps for N seconds.
+* `NAME=value` sets the environment variable `NAME` like `env` does.
+* `-S NAME values` sets the environment variable `NAME` to `value`.
+* `-U NAME` unsets the environment variable `NAME`.
 * `-I file` redirects stdin to read from the given file.
 * `-O file` redirects stdout to write to the given file.
 * `-X` replaces every sequence `X<hex><hex>` in all following
@@ -24,9 +27,11 @@ Similar to `env`, but having a wildly different option set:
   the given user. Requires sufficient privileges.
 * `--fork` goes into background by forking and exiting in the
   foreground process.
-* `NAME=value` sets the environment variable `NAME` like `env` does.
-* `-S NAME values` sets the environment variable `NAME` to `value`.
-* `-U NAME` unsets the environment variable `NAME`.
+* `--reaper-fork` continues option and argument processing in a
+  forked process. The main process waits for the subprocess to
+  terminate, and also waits for other children, and passes
+  `SIGINT` and `SIGTERM` on to the subprocess (and only to
+  that pid). Useful as a docker root process in case of zombies.
 
 Options are processed in order they are given.
 

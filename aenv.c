@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <pwd.h>
+#include <signal.h>
 
 int hexof (int c) {
 	switch (c) {
@@ -28,6 +29,41 @@ int hexof (int c) {
 	case 'E': case 'e': return 14;
 	case 'F': case 'f': return 15;
 	default: return -1;
+	}
+}
+
+static pid_t child;
+
+static void sig_hdl (int sig) {
+	kill (child, sig);
+}
+
+static struct sigaction sig_act = { sig_hdl, 0, 0, 0, 0 };
+
+static void setup_sig (int sig) {
+	sigaction (sig, &sig_act, 0);
+}
+
+static void reaper_fork () {
+
+	setup_sig (SIGTERM);
+	setup_sig (SIGINT);
+
+	child = fork ();
+	if (child == -1) {
+		fprintf (stderr, "Cannot fork\n");
+		exit (1);
+	}
+	if (child == 0) return;
+
+	while (1) {
+		int status;
+		pid_t r = wait (&status);
+		fprintf (stderr, "Pid %d terminated with %d [%x]\n", (int)r, status >> 8, status);
+		fflush (stderr);
+		if (r == child) {
+			exit (status >> 8);
+		}
 	}
 }
 
@@ -178,6 +214,8 @@ main (int argc, char **argv) {
 			if (r != 0) {
 				return 0;
 			}
+		} else if (strcmp (argv [i], "--reaper-fork") == 0) {
+			reaper_fork ();
 		} else if (strchr (argv [i], '=')) {
 			/* Yes, putenv is save here; it's argument
 			 * is from the parameter array.
