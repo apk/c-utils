@@ -9,7 +9,8 @@ rename and recreation of the file.
 
 ## `aenv`
 
-Similar to `env`, but having a wildly different option set:
+Similar to `env`, but extended to a swiss army knife,
+to avoid shell processes or shim shells altogether. Options:
 
 * `-C arg` changes into the given directory.
 * `-v` shows the currently remaining arguments.
