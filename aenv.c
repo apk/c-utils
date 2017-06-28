@@ -59,7 +59,25 @@ static void reaper_fork () {
 	while (1) {
 		int status;
 		pid_t r = wait (&status);
-		fprintf (stderr, "Pid %d terminated with %d [%x]\n", (int)r, status >> 8, status);
+		int ex = (status & 255);
+		char *p, ec [12];
+		char exr [20];
+		switch (ex) {
+		case SIGINT: p = " sigint"; break;
+		case SIGPIPE: p = " sigpipe"; break;
+		case SIGTERM: p = " sigterm"; break;
+		case SIGKILL: p = " sigkill"; break;
+		case 0: p = ""; break;
+		default: sprintf (ec, " sig%d", ex); p = ec; break;
+		}
+		status >>= 8;
+		if (status != 0) {
+			sprintf (exr, " exit %d", status & 255);
+		} else {
+			exr [0] = 0;
+		}
+		fprintf (stderr, "aenv: reaped pid %d%s%s\n",
+			 (int)r, exr, p);
 		fflush (stderr);
 		if (r == child) {
 			exit (status >> 8);
