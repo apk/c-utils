@@ -33,6 +33,8 @@ to avoid shell processes or shim shells altogether. Options:
   terminate, and also waits for other children, and passes
   `SIGINT` and `SIGTERM` on to the subprocess (and only to
   that pid). Useful as a docker root process in case of zombies.
+  Each process thus reaped is logged on stderr, with its pid,
+  its exit code if nonzero, and the killing signal if applicable.
 
 Options are processed in order they are given.
 
