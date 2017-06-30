@@ -3,6 +3,13 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+/* Create some zombies that were terminated
+ * with different exit codes or signals, to
+ * test aenv --reaper-fork. See below for
+ * how to test under Docker (which is the
+ * raison d'etre of --reaper-fork).
+ */
+
 main () {
   
   int c = 0;
