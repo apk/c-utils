@@ -176,6 +176,34 @@ main (int argc, char **argv) {
 			}
 			fprintf (stderr, "No arg for --pwnam\n");
 			return 1;
+		} else if (!strcmp (argv [i], "--su")) {
+			if (i + 1 < argc) {
+				char *u = argv [++ i];
+				char *t;
+				struct passwd *p = getpwnam (u);
+				if (!p) {
+					fprintf (stderr, "No passwd entry for %s\n", u);
+					return 3;
+				}
+				if (setregid (p->pw_gid, p->pw_gid)) {
+					perror ("setgid");
+					return 4;
+				}
+				if (setreuid (p->pw_uid, p->pw_uid)) {
+					perror ("setuid");
+					return 4;
+				}
+				if (setenv ("HOME", p->pw_dir, 1) ||
+				    setenv ("USER", u, 1) ||
+				    setenv ("LOGNAME", u, 1))
+				{
+					perror ("setenv");
+					return 4;
+				}
+				continue;
+			}
+			fprintf (stderr, "No arg for --su\n");
+			return 1;
 		} else if (argv [i] [0] == '-' &&
 			   argv [i] [1] == 'v' &&
 			   argv [i] [2] == 0)
