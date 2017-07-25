@@ -2,11 +2,6 @@
 
 This is a set of unix utility program that I wrote because I found them helpful.
 
-## `rdlog`
-
-Like `tail -f`, except it always outputs the entire file, and it does also follow
-rename and recreation of the file.
-
 ## `aenv`
 
 Similar to `env`, but extended to a swiss army knife,
@@ -52,6 +47,11 @@ same as `git -C dir ...`, and `cdx dir GIT_COMMITTER_NAME='John Doe' git ...`
 will pass that environment variable to git.
 
 It's somewhat stupid that the builtin `cd` or various shells doesn't do this.
+
+## `rdlog`
+
+Like `tail -f`, except it always outputs the entire file, and it does also follow
+rename and recreation of the file.
 
 ## `args`
 
