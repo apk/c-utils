@@ -34,6 +34,14 @@ to avoid shell processes or shim shells altogether. Options:
   its exit code if nonzero, and the killing signal if applicable.
 * `-AN` sets `alarm()` in N seconds, thereby providing a hard
   timeout for the command finally being executed (caveats apply).
+* `# arg arg arg` (first argument only): hashbang mode. If the first
+  argument begins with a `#` its second character is taken as a
+  separator, the argument is split at all further occurrences of
+  that character, and that list replaces the first argument as
+  multiple arguments. E.g. the hashbang line `#!/usr/bin/aenv
+  #,VAR=value,/usr/bin/ruby` will execute the containing script
+  as a ruby script with the environment variable `VAR` set to
+  `value`.
 
 Options are processed in order they are given.
 

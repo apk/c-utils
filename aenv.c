@@ -89,6 +89,39 @@ main (int argc, char **argv) {
 	int i = 1;
 #ifdef CDX
 	int wantcd = 1;
+#else
+	if (argc > 1) {
+		char *al = argv [1];
+		if (*al ++ == '#') {
+			char sep = *al ++;
+			if (sep) {
+				/* #! replacement mode */
+				char **nargv, **ap;
+				char *duparg = strdup (al);
+				char *t;
+				int c;
+				for (t = duparg, c = 0; *t; t ++) {
+					if (*t == sep) c ++;
+				}
+				nargv = malloc (sizeof (char *) * (c + argc + 1));
+				ap = nargv;
+				*ap ++ = argv [0];
+				*ap ++ = duparg;
+				for (t = duparg; *t; t ++) {
+					if (*t == sep) {
+						*ap ++ = t + 1;
+						*t = 0;
+					}
+				}
+				for (c = 2; argv [c]; c ++) {
+					*ap ++ = argv [c];
+				}
+				*ap = 0;
+				argc = ap - nargv;
+				argv = nargv;
+			}
+		}
+	}
 #endif
 	for ( ; i < argc; i ++) {
 		int del;
