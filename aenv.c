@@ -189,6 +189,37 @@ main (int argc, char **argv) {
 			}
 			fprintf (stderr, "No arg for -I\n");
 			return 1;
+		} else if (!strcmp (argv [i], "--id")) {
+			if (i + 1 < argc) {
+				long uid, gid;
+				char *h;
+				char *u = argv [++ i];
+				uid = strtol (u, &h, 10);
+				if (h > u) {
+					if (*h == ':') {
+						char *j;
+						gid = strtol (h + 1, &j, 10);
+						if (j > h + 1 && !*j) {
+							if (setregid (gid, gid)) {
+								fprintf (stderr, "setgid failed\n");
+								return 4;
+							}
+							h = j;
+						}
+					}
+					if (!*h) {
+						if (setreuid (uid, uid)) {
+							fprintf (stderr, "setuid failed\n");
+							return 4;
+						}
+						continue;
+					}
+				}
+				fprintf (stderr, "bad arg for --id\n");
+				return 1;
+			}
+			fprintf (stderr, "No arg for --id\n");
+			return 1;
 		} else if (!strcmp (argv [i], "--pwnam")) {
 			if (i + 1 < argc) {
 				char *u = argv [++ i];

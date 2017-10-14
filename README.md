@@ -20,9 +20,11 @@ to avoid shell processes or shim shells altogether. Options:
   a hack for some ssh versions that `s/=/ /` on `ProxyCommand`.
 * `-Xc` similar, but use the given char instead of `X`.
 * `--pwnam user` change (primary) group and user id to that of
-  the given user. Requires sufficient privileges.
+  the given user. (Requires sufficient privileges.)
 * `--su user`: Like `--pwnam`, but also sets `HOME`, `USER`,
   and `LOGNAME` accordingly.
+* `--id user`, `--id user:group`: change (group and) user id
+  to the given numeric values.
 * `--fork` goes into background by forking and exiting in the
   foreground process.
 * `--reaper-fork` continues option and argument processing in a
