@@ -48,7 +48,11 @@ to avoid shell processes or shim shells altogether. Options:
 Options are processed in order they are given.
 
 The first thing that is not one of the above is taken as the command
-to execute, with the following arguments as parameters.
+to execute, with the following arguments as parameters, except if
+that begins with a minus sign.
+
+If there is no command in the arguments `$SHELL` or, as a fallback,
+`/bin/sh` is started.
 
 ## `cdx`
 
