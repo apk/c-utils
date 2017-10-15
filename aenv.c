@@ -335,11 +335,16 @@ main (int argc, char **argv) {
 		} else if (strchr (argv [i], '=')) {
 			/* Yes, putenv is save here; it's argument
 			 * is from the parameter array.
+			 * (Or from the strdup for the
+			 * '#' argument form.)
 			 */
 			if (putenv (argv [i])) {
 				perror ("putenv");
 				return 1;
 			}
+		} else if (argv [i] [0] == '-') {
+			fprintf (stderr, "Bad option %s\n", argv [i]);
+			return 4;
 #ifdef CDX
 		} else if (wantcd) {
 			wantcd = 0;
