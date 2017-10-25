@@ -243,7 +243,6 @@ main (int argc, char **argv) {
 		} else if (!strcmp (argv [i], "--su")) {
 			if (i + 1 < argc) {
 				char *u = argv [++ i];
-				char *t;
 				struct passwd *p = getpwnam (u);
 				if (!p) {
 					fprintf (stderr, "No passwd entry for %s\n", u);
@@ -332,19 +331,22 @@ main (int argc, char **argv) {
 			}
 		} else if (strcmp (argv [i], "--reaper-fork") == 0) {
 			reaper_fork ();
+		} else if (argv [i] [0] == '-') {
+			fprintf (stderr, "Bad option %s\n", argv [i]);
+			return 4;
+			/* XXX Having -- as argument terminator
+			 * collides with the wantcd handling,
+			 * so we don't.
+			 */
 		} else if (strchr (argv [i], '=')) {
-			/* Yes, putenv is save here; it's argument
-			 * is from the parameter array.
-			 * (Or from the strdup for the
-			 * '#' argument form.)
+			/* Yes, putenv is safe here; it's argument
+			 * is from the parameter array. (Or from
+			 * the strdup for the '#' argument form.)
 			 */
 			if (putenv (argv [i])) {
 				perror ("putenv");
 				return 1;
 			}
-		} else if (argv [i] [0] == '-') {
-			fprintf (stderr, "Bad option %s\n", argv [i]);
-			return 4;
 #ifdef CDX
 		} else if (wantcd) {
 			wantcd = 0;
