@@ -9,6 +9,7 @@
 #include <fcntl.h>
 #include <pwd.h>
 #include <signal.h>
+#include <sys/prctl.h>
 
 int hexof (int c) {
 	switch (c) {
@@ -48,6 +49,10 @@ static void reaper_fork () {
 
 	setup_sig (SIGTERM);
 	setup_sig (SIGINT);
+
+	if (getpid () != 1) {
+		prctl (PR_SET_CHILD_SUBREAPER);
+	}
 
 	child = fork ();
 	if (child == -1) {

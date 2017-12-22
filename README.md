@@ -34,6 +34,7 @@ to avoid shell processes or shim shells altogether. Options:
   that pid). Useful as a docker root process in case of zombies.
   Each process thus reaped is logged on stderr, with its pid,
   its exit code if nonzero, and the killing signal if applicable.
+  On linux > 3.4 this works as any process.
 * `-AN` sets `alarm()` in N seconds, thereby providing a hard
   timeout for the command finally being executed (caveats apply).
 * `# arg arg arg` (first argument only): hashbang mode. If the first
