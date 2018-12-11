@@ -90,3 +90,7 @@ Like cat, but escape special characters, and backticks, by a backtick
 and the two hex digits representing the character. Special characters
 are everything but printable asccii characters, newlines, tabs, and
 carriage returns.
+
+With `-d` it instead decodes backtick escapes bach to the original
+characters. Backticks not followed by two hex digits are left as
+they are.
