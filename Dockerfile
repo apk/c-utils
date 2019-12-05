@@ -1,3 +1,5 @@
+#% Name: apk/c-utils
+
 FROM gcc
 
 RUN mkdir /work /work/bin
