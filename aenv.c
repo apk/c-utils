@@ -81,12 +81,15 @@ static void reaper_fork () {
 		} else {
 			exr [0] = 0;
 		}
+		if (r == child) {
+			fprintf (stderr, "aenv: got child%s%s\n",
+				 exr, p);
+			fflush (stderr);
+			exit (status >> 8);
+		}
 		fprintf (stderr, "aenv: reaped pid %d%s%s\n",
 			 (int)r, exr, p);
 		fflush (stderr);
-		if (r == child) {
-			exit (status >> 8);
-		}
 	}
 }
 
