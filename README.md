@@ -74,10 +74,11 @@ rename and recreation of the file.
 
 Shows its arguments, printing them C-escaped when characters in the values
 are sufficiently strange. Takes a single option argument as its first
-argument if that starts with a minus. If a `q` is there all output is
+argument if that starts with a minus. If a `q` is there output is always
 quoted, not only when needed. A `m` enables multiline output - there
 will be a newline after each argument instead of everything being on
 one line. A `h` causes the option argument itself to be omitted.
+A `%` causes `%` instead of `\` to be used as the escaping character.
 
 ## `xd`
 

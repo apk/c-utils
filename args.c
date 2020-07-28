@@ -6,6 +6,7 @@ main (int argc, char **argv) {
 	int multiline = 0;
 	int always = 0;
 	int hide = 0;
+	int qchar = '\\';
 	int i;
 	int nextsep = 0;
 	if (argc > 1) {
@@ -14,6 +15,9 @@ main (int argc, char **argv) {
 			char *h = pc + 1;
 			while (*h) {
 				switch (*h ++) {
+				case '%':
+					qchar = '%';
+					break;
 				case 'q':
 					always = 1;
 					break;
@@ -57,23 +61,26 @@ main (int argc, char **argv) {
 			putchar ('\"');
 			for (pc = argv [i]; *pc; pc ++) {
 				int c = 0xff & *pc;
+				if (c == qchar) {
+					printf ("%c%c", qchar, c);
+					continue;
+				}
 				switch (c) {
 				case '\"':
 				case '\'':
-				case '\\':
-					printf ("\\%c", c);
+					printf ("%c%c", qchar, c);
 					break;
 				case '\n':
-					printf ("\\n");
+					printf ("%cn", qchar);
 					break;
 				case '\t':
-					printf ("\\t");
+					printf ("%ct", qchar);
 					break;
 				default:
 					if (c >= ' ' && c <= '~') {
 						putchar (c);
 					} else {
-						printf ("\\%03o", c);
+						printf ("%c%03o", qchar, c);
 					}
 					break;
 				}
