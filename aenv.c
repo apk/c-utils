@@ -339,6 +339,8 @@ main (int argc, char **argv) {
 			}
 		} else if (strcmp (argv [i], "--reaper-fork") == 0) {
 			reaper_fork ();
+		} else if (strcmp (argv [i], "--ignore-sigwinch") == 0) {
+			signal (SIGWINCH, SIG_IGN);
 		} else if (argv [i] [0] == '-') {
 			fprintf (stderr, "Bad option %s\n", argv [i]);
 			return 4;

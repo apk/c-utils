@@ -25,6 +25,8 @@ to avoid shell processes or shim shells altogether. Options:
   and `LOGNAME` accordingly.
 * `--id user`, `--id user:group`: change (group and) user id
   to the given numeric values.
+* `--ignore-sigwinch`: Ignore `SIGWINCH` signals (which e.g.
+  apache reacts to with dying).
 * `--fork` goes into background by forking and exiting in the
   foreground process.
 * `--reaper-fork` continues option and argument processing in a
@@ -89,9 +91,9 @@ of early debuggers and monitors. Read stdin if no arguments are given.
 
 Like cat, but escape special characters, and backticks, by a backtick
 and the two hex digits representing the character. Special characters
-are everything but printable asccii characters, newlines, tabs, and
+are everything but printable ascii characters, newlines, tabs, and
 carriage returns.
 
-With `-d` it instead decodes backtick escapes bach to the original
+With `-d` it instead decodes backtick escapes back to the original
 characters. Backticks not followed by two hex digits are left as
 they are.
