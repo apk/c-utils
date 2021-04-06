@@ -1,12 +1,7 @@
 /* -*- mode: C; c-basic-offset: 8; -*- */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/stat.h>
-#include <fcntl.h>
+#include "hdr.h"
+
 #include <pwd.h>
 #include <signal.h>
 #include <sys/prctl.h>
@@ -93,7 +88,7 @@ static void reaper_fork () {
 	}
 }
 
-main (int argc, char **argv) {
+int main (int argc, char **argv) {
 	int i = 1;
 #ifdef CDX
 	int wantcd = 1;

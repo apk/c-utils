@@ -1,9 +1,8 @@
 /* -*- mode: C; c-basic-offset: 8; -*- */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "hdr.h"
 
-dofd (int fd) {
+int dofd (int fd) {
 	int z = 0;
 	unsigned char buf [16];
 	while (1) {
@@ -41,7 +40,7 @@ dofd (int fd) {
 	}
 }
 
-main (int argc, char **argv) {
+int main (int argc, char **argv) {
 	int i;
 	if (argc > 1) {
 		for (i = 1; i < argc; i ++) {

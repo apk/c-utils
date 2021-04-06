@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 
-main (int argc, char **argv) {
+int main (int argc, char **argv) {
 	int multiline = 0;
 	int always = 0;
 	int hide = 0;
