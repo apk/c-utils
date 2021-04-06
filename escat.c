@@ -1,10 +1,8 @@
 /* -*- mode: C; c-basic-offset: 8; -*- */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
+#include "hdr.h"
 
-dofd (int fd) {
+static int dofd (int fd) {
 	char tbuf [80];
 	char buf [256];
 	int l = 0;
@@ -30,7 +28,7 @@ dofd (int fd) {
 	}
 }
 
-main (int argc, char **argv) {
+int main (int argc, char **argv) {
 	int i;
 	if (argc <= 1) {
 		dofd (0);

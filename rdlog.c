@@ -1,10 +1,8 @@
 /* -*- mode: C; c-basic-offset: 8; -*- */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/stat.h>
+#include "hdr.h"
 
-main (int argc, char **argv) {
+int main (int argc, char **argv) {
         char *fnam;
         int fd;
         int l;
