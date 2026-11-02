@@ -29,7 +29,7 @@ static int hex (char x) {
 	}
 }
 
-dofd (int fd) {
+int dofd (int fd) {
 	char buf [8192];
 	int sz = 0;
 	while (1) {
