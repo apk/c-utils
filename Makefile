@@ -1,4 +1,4 @@
-all : $(HOME)/bin/rdlog $(HOME)/bin/args $(HOME)/bin/xd $(HOME)/bin/cdx $(HOME)/bin/aenv $(HOME)/bin/escat $(HOME)/bin/unsc $(HOME)/bin/sc
+all : $(HOME)/bin/rdlog $(HOME)/bin/args $(HOME)/bin/xd $(HOME)/bin/cdx $(HOME)/bin/aenv $(HOME)/bin/escat $(HOME)/bin/unsc $(HOME)/bin/sc $(HOME)/bin/utf8ify
 
 $(HOME)/bin/rdlog : rdlog.c hdr.h
 	cc -o $@ $^
@@ -22,4 +22,7 @@ $(HOME)/bin/unsc : sc.c
 	cc -D UN -o $@ $^
 
 $(HOME)/bin/sc : sc.c
+	cc -o $@ $^
+
+$(HOME)/bin/utf8ify : utf8ify.c hdr.h
 	cc -o $@ $^

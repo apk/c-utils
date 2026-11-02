@@ -97,3 +97,17 @@ carriage returns.
 With `-d` it instead decodes backtick escapes back to the original
 characters. Backticks not followed by two hex digits are left as
 they are.
+
+## `utf8ify`
+
+Like cat, but repairs invalid UTF-8: any byte sequence that isn't
+valid UTF-8 is assumed to be ISO-8859-1 (Latin-1), except for bytes
+in the 0x80-0x9f range, which are far more often mis-encoded CP1252
+than genuine C1 control codes, and so are translated via the CP1252
+table instead. The few code points CP1252 itself leaves undefined
+in that range fall back to raw Latin-1.
+
+Reads stdin if no arguments are given. A `-` argument also means
+stdin, and may be mixed with file arguments. If a file fails to
+open, an error is printed to stderr and the remaining arguments are
+still processed, but the exit status is nonzero.
