@@ -283,13 +283,13 @@ int main (int argc, char **argv) {
 			printf ("\n");
 		} else if (argv [i] [0] == '-' &&
 			   argv [i] [1] == 'A' &&
-			   ((del = strtol (argv [i] + 2, &q, 10)), !*q)&&
+			   ((del = strtol (argv [i] + 2, &q, 10)), !*q) &&
 			   del > 0)
 		{
 			alarm (del);
 		} else if (argv [i] [0] == '-' &&
 			   argv [i] [1] == 'w' &&
-			   ((del = strtol (argv [i] + 2, &q, 10)), !*q)&&
+			   ((del = strtol (argv [i] + 2, &q, 10)), !*q) &&
 			   del > 0)
 		{
 			sleep (del);
